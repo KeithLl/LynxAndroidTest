@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 //        initMain()
         initView()
 
-        val uri = "main1.lynx.bundle";
+        val uri = "maininput.lynx.bundle";
         lynxView!!.renderTemplateUrl(uri, "")
 
         // 延迟发送一个事件

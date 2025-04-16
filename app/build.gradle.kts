@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.annotationProcessor
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -22,8 +24,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -52,6 +53,7 @@ dependencies {
     implementation("org.lynxsdk.lynx:lynx-jssdk:3.2.0-rc.0")
     implementation("org.lynxsdk.lynx:lynx-trace:3.2.0-rc.0")
     implementation("org.lynxsdk.lynx:primjs:2.11.1-rc.0")
+    annotationProcessor("org.lynxsdk.lynx:lynx:3.2.0-rc.0")
 
     // integrating image-service
     implementation("org.lynxsdk.lynx:lynx-service-image:3.2.0-rc.0")
@@ -70,8 +72,8 @@ dependencies {
     implementation("org.lynxsdk.lynx:lynx-service-http:3.2.0-rc.0")
 
     // devTools
-    implementation ("org.lynxsdk.lynx:lynx-devtool:3.2.0-rc.0")
-    implementation ("org.lynxsdk.lynx:lynx-service-devtool:3.2.0-rc.0")
+    implementation("org.lynxsdk.lynx:lynx-devtool:3.2.0-rc.0")
+    implementation("org.lynxsdk.lynx:lynx-service-devtool:3.2.0-rc.0")
 
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
 

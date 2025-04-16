@@ -36,7 +36,7 @@ class BaseApp : Application() {
         LynxServiceCenter.inst().registerService(LynxImageService.getInstance())
         LynxServiceCenter.inst().registerService(LynxLogService)
         LynxServiceCenter.inst().registerService(LynxHttpService)
-//        LynxServiceCenter.inst().registerService(LynxDevToolService)
+        LynxServiceCenter.inst().registerService(LynxDevToolService)
     }
 
     private fun initLynxEnv() {
@@ -46,16 +46,18 @@ class BaseApp : Application() {
             null, // 全局AppBundle加载器
             null // 自定义组件列表
         )
-        LynxEnv.inst().addBehavior(object : Behavior("myInput") {
-            override fun createUI(context: LynxContext?): LynxUI<*>? {
-                return MyLynxInput(context!!)
+
+        // 全局添加自定义组件
+        LynxEnv.inst().addBehavior(object : Behavior("hhinput") {
+            override fun createUI(context: LynxContext): MyLynxInput {
+                return MyLynxInput(context)
             }
         })
-//        // 打开 Lynx Debug 开关
-//        LynxEnv.inst().enableLynxDebug(true)
-//        // 打开 Lynx DevTool 开关
-//        LynxEnv.inst().enableDevtool(true)
-//        // 打开 Lynx LogBox 开关
-//        LynxEnv.inst().enableLogBox(true)
+        // 打开 Lynx Debug 开关
+        LynxEnv.inst().enableLynxDebug(true)
+        // 打开 Lynx DevTool 开关
+        LynxEnv.inst().enableDevtool(true)
+        // 打开 Lynx LogBox 开关
+        LynxEnv.inst().enableLogBox(true)
     }
 }
