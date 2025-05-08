@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.android.lynx.provider.DemoTemplateProvider
+import com.android.lynx.provider.RemoteTemplateProvider
 import com.lynx.react.bridge.JavaOnlyArray
 import com.lynx.tasm.LynxView
 import com.lynx.tasm.LynxViewBuilder
@@ -23,11 +24,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-//        initMain()
-        initView()
+        initMain()
+//        initView()
 
-        val uri = "maininput.lynx.bundle";
-        lynxView!!.renderTemplateUrl(uri, "")
+        val uri = "main.lynx.bundle"
+//        val uri2 = "https://susuanqiniu.knowbox.cn/livetest/main.lynx.bundle"
+        val uri2 = "https://susuanqiniu.knowbox.cn/livetest/example.lynx.bundle"
+        lynxView!!.renderTemplateUrl(uri2, "")
 
         // 延迟发送一个事件
         initEvent()
@@ -48,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         // 设置LynxView
         lynxView = findViewById<LynxView>(R.id.lynxView)
         val viewBuilder: LynxViewBuilder = LynxViewBuilder()
-        viewBuilder.setTemplateProvider(DemoTemplateProvider(this))
+        viewBuilder.setTemplateProvider(RemoteTemplateProvider(this))
         lynxView!!.initWithLynxViewBuilder(viewBuilder)
     }
 

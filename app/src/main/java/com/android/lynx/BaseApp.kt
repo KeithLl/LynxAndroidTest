@@ -36,7 +36,7 @@ class BaseApp : Application() {
         LynxServiceCenter.inst().registerService(LynxImageService.getInstance())
         LynxServiceCenter.inst().registerService(LynxLogService)
         LynxServiceCenter.inst().registerService(LynxHttpService)
-        LynxServiceCenter.inst().registerService(LynxDevToolService)
+//        LynxServiceCenter.inst().registerService(LynxDevToolService)
     }
 
     private fun initLynxEnv() {
@@ -53,11 +53,11 @@ class BaseApp : Application() {
                 return MyLynxInput(context)
             }
         })
-        // 打开 Lynx Debug 开关
-        LynxEnv.inst().enableLynxDebug(true)
-        // 打开 Lynx DevTool 开关
-        LynxEnv.inst().enableDevtool(true)
-        // 打开 Lynx LogBox 开关
-        LynxEnv.inst().enableLogBox(true)
+//        // 打开 Lynx Debug 开关
+//        LynxEnv.inst().enableLynxDebug(true)
+//        // 打开 Lynx DevTool 开关
+//        LynxEnv.inst().enableDevtool(true)
+//        // 打开 Lynx LogBox 开关
+//        LynxEnv.inst().enableLogBox(true)
     }
 }
