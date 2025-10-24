@@ -1,6 +1,7 @@
 package com.android.lynx.provider
 
 import android.content.Context
+import android.util.Log
 import com.lynx.tasm.provider.AbsTemplateProvider
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -17,6 +18,7 @@ class RemoteTemplateProvider(context: Context) : AbsTemplateProvider() {
                 // 创建 URL 对象
                 val indexOf = if (uri.indexOf("?") > 0 ) uri.indexOf("?") else uri.length
                 val url = URL(uri.substring(0, indexOf))
+                Log.e("Keith", "URL is :$url")
                 // 打开连接并获取输入流
                 url.openConnection().getInputStream().use { inputStream ->
                     ByteArrayOutputStream().use { byteArrayOutputStream ->
@@ -25,6 +27,7 @@ class RemoteTemplateProvider(context: Context) : AbsTemplateProvider() {
                         while ((inputStream.read(buffer).also { length = it }) != -1) {
                             byteArrayOutputStream.write(buffer, 0, length)
                         }
+                        Log.e("Keith", "byteArrayOutputStream is :${byteArrayOutputStream.toByteArray().size}")
                         callback.onSuccess(byteArrayOutputStream.toByteArray())
                     }
                 }

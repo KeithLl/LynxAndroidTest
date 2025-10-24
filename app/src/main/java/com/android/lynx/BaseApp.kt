@@ -1,20 +1,21 @@
 package com.android.lynx
 
 import android.app.Application
+import com.android.lynx.callback.GlobalLynxCallbackImpl
+import com.android.lynx.modules.NativeLynxModule
 import com.android.lynx.widget.MyLynxInput
-import com.lynx.tasm.LynxEnv
-import com.lynx.service.http.LynxHttpService
-import com.lynx.service.image.LynxImageService
-import com.lynx.service.log.LynxLogService
-import com.lynx.tasm.service.LynxServiceCenter
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.memory.PoolConfig
 import com.facebook.imagepipeline.memory.PoolFactory
 import com.lynx.service.devtool.LynxDevToolService
+import com.lynx.service.http.LynxHttpService
+import com.lynx.service.image.LynxImageService
+import com.lynx.service.log.LynxLogService
+import com.lynx.tasm.LynxEnv
 import com.lynx.tasm.behavior.Behavior
 import com.lynx.tasm.behavior.LynxContext
-import com.lynx.tasm.behavior.ui.LynxUI
+import com.lynx.tasm.service.LynxServiceCenter
 
 /**
  * Created by KeithLee on 2025/4/10.
@@ -36,7 +37,7 @@ class BaseApp : Application() {
         LynxServiceCenter.inst().registerService(LynxImageService.getInstance())
         LynxServiceCenter.inst().registerService(LynxLogService)
         LynxServiceCenter.inst().registerService(LynxHttpService)
-//        LynxServiceCenter.inst().registerService(LynxDevToolService)
+        LynxServiceCenter.inst().registerService(LynxDevToolService.INSTANCE)
     }
 
     private fun initLynxEnv() {
@@ -53,11 +54,15 @@ class BaseApp : Application() {
                 return MyLynxInput(context)
             }
         })
-//        // 打开 Lynx Debug 开关
-//        LynxEnv.inst().enableLynxDebug(true)
-//        // 打开 Lynx DevTool 开关
-//        LynxEnv.inst().enableDevtool(true)
-//        // 打开 Lynx LogBox 开关
-//        LynxEnv.inst().enableLogBox(true)
+        LynxEnv.inst().registerModule(
+            "NativeLynxModule",
+            NativeLynxModule::class.java, GlobalLynxCallbackImpl
+        )
+        // 打开 Lynx Debug 开关
+        LynxEnv.inst().enableLynxDebug(true)
+        // 打开 Lynx DevTool 开关
+        LynxEnv.inst().enableDevtool(true)
+        // 打开 Lynx LogBox 开关
+        LynxEnv.inst().enableLogBox(true)
     }
 }
